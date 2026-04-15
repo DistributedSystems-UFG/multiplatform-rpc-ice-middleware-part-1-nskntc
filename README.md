@@ -2,6 +2,8 @@
 
 # ICE Middleware - RPC Demo
 
+Nícolas Santana Kruger - 202200545
+
 Baseado no exemplo 3.21 do livro de Maarten van Steen, com dois metodos adicionais.
 
 ## Metodos da interface Printer
