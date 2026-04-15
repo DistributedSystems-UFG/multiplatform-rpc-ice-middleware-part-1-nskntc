@@ -1,10 +1,10 @@
 import sys, Ice
 import Demo
- 
+
 communicator = Ice.initialize(sys.argv)
 
-base1 = communicator.stringToProxy("SimplePrinter1:tcp -h 98.90.53.6 -p 11000")
-base2 = communicator.stringToProxy("SimplePrinter2:tcp -h 98.90.53.6 -p 11000")
+base1 = communicator.stringToProxy("SimplePrinter1:tcp -h localhost -p 11000")
+base2 = communicator.stringToProxy("SimplePrinter2:tcp -h localhost -p 11000")
 printer1 = Demo.PrinterPrx.checkedCast(base1)
 printer2 = Demo.PrinterPrx.checkedCast(base2)
 if (not printer1) or (not printer2):
@@ -15,4 +15,12 @@ print(rep)
 rep = printer2.printString("Hello World from printer2!")
 print(rep)
 
-communicator.waitForShutdown()
+rep = printer1.reverseString("ICE Middleware")
+print("printer1 reverse:", rep)
+rep = printer2.reverseString("Distributed Systems")
+print("printer2 reverse:", rep)
+
+rep = printer1.toUpperCase("hello from printer1")
+print("printer1 upper:", rep)
+rep = printer2.toUpperCase("hello from printer2")
+print("printer2 upper:", rep)

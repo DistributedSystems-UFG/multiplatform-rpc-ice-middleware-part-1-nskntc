@@ -1,15 +1,25 @@
 import sys, Ice
 import Demo
- 
+
 class PrinterI(Demo.Printer):
     def __init__(self, t):
         self.t = t
-        
+
     def printString(self, s, current=None):
         print(self.t, s)
         return s + "*"
 
-communicator = Ice.initialize(sys.argv) 
+    def reverseString(self, s, current=None):
+        result = s[::-1]
+        print(self.t, "reverse:", result)
+        return result
+
+    def toUpperCase(self, s, current=None):
+        result = s.upper()
+        print(self.t, "upper:", result)
+        return result
+
+communicator = Ice.initialize(sys.argv)
 
 adapter = communicator.createObjectAdapterWithEndpoints("SimpleAdapter", "default -p 11000")
 object1 = PrinterI("Object1 says:")
